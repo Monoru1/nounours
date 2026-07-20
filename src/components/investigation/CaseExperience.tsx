@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { GiftConfig } from '../../content/gift';
-import desk from '../../assets/inspecteur-nounours-bureau.jpg';
+import desk from '../../assets/desk';
 
 type Props = { config: GiftConfig; soundOn: boolean; onSoundChange: (value: boolean) => void; reducedMotion: boolean; onReducedMotionChange: (value: boolean) => void };
 const clues = [{ id:'photo', label:'Une photographie blanchie', text:'Un visage manque. Quelqu’un efface les traces.' }, { id:'watch', label:'Une montre arrêtée', text:'23 h 52. Il reste très peu de temps.' }, { id:'letter', label:'Une lettre sans encre', text:'Un seul mot résiste encore : Lawal.' }];
