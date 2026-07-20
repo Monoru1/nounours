@@ -3,6 +3,7 @@ import { CaseExperience } from './components/investigation/CaseExperience';
 import { giftConfig } from './content/gift';
 import './styles/investigation.css';
 import './styles/casino.css';
+import './styles/game.css';
 
 export function App() {
   const [soundOn, setSoundOn] = useState(false);
