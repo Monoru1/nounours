@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { CaseExperience } from './components/investigation/CaseExperience';
 import { giftConfig } from './content/gift';
 import './styles/investigation.css';
+import './styles/casino.css';
 
 export function App() {
   const [soundOn, setSoundOn] = useState(false);
