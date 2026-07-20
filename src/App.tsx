@@ -4,6 +4,7 @@ import { giftConfig } from './content/gift';
 import './styles/investigation.css';
 import './styles/casino.css';
 import './styles/game.css';
+import './styles/readability.css';
 
 export function App() {
   const [soundOn, setSoundOn] = useState(false);
