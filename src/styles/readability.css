@@ -1,0 +1,108 @@
+/* The world stays dark; the story is always allowed to be read. */
+.opening,
+.ending {
+  isolation: isolate;
+}
+
+.opening::before {
+  background: linear-gradient(90deg, rgba(3, 4, 4, 0.96) 0%, rgba(3, 4, 4, 0.88) 46%, rgba(3, 4, 4, 0.35) 78%, rgba(3, 4, 4, 0.12) 100%) !important;
+}
+
+.ending {
+  align-items: flex-start !important;
+  padding-top: clamp(3.25rem, 8vh, 6.6rem) !important;
+}
+
+.ending::before {
+  background: linear-gradient(90deg, rgba(3, 4, 4, 0.97) 0%, rgba(3, 4, 4, 0.92) 58%, rgba(3, 4, 4, 0.52) 100%) !important;
+}
+
+.rain {
+  z-index: 0 !important;
+  opacity: 0.16 !important;
+  pointer-events: none;
+}
+
+.opening-copy,
+.ending-copy,
+.world-copy,
+.opening-line {
+  position: relative;
+  z-index: 2 !important;
+}
+
+.opening-copy,
+.ending-copy {
+  max-width: min(48rem, 92vw) !important;
+}
+
+.ending-copy {
+  padding: clamp(1.25rem, 3vw, 2.6rem) !important;
+  border-left: 2px solid #d9b56c;
+  background: linear-gradient(90deg, rgba(7, 8, 8, 0.94), rgba(7, 8, 8, 0.82) 70%, rgba(7, 8, 8, 0.28));
+  backdrop-filter: blur(5px);
+}
+
+.opening h1,
+.ending h1,
+.world h2 {
+  max-width: 12ch;
+  color: #fff7e8 !important;
+  font-size: clamp(3.15rem, 5.55vw, 6.3rem) !important;
+  line-height: 0.9 !important;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.95);
+}
+
+.opening-copy > p:not(.case-stamp),
+.ending-copy > p:not(.case-stamp),
+.world-copy > p,
+.opening-line,
+.casino-sign {
+  color: #f8ebd5 !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+}
+
+.opening .case-stamp,
+.ending .case-stamp,
+.world .case-stamp {
+  color: #f4cf85 !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+}
+
+.birthday {
+  max-height: 34vh !important;
+  overflow: auto;
+  padding: 1.1rem 1.3rem !important;
+  border: 1px solid rgba(215, 179, 110, 0.52);
+  border-radius: 2px;
+  background: rgba(18, 16, 13, 0.94) !important;
+  color: #fff3dd !important;
+  line-height: 1.62 !important;
+  scrollbar-color: #c8a563 #28231d;
+  scrollbar-width: thin;
+}
+
+.birthday::-webkit-scrollbar { width: 8px; }
+.birthday::-webkit-scrollbar-track { background: #28231d; }
+.birthday::-webkit-scrollbar-thumb { background: #c8a563; border-radius: 99px; }
+
+@media (max-width: 760px) {
+  .opening h1,
+  .ending h1,
+  .world h2 {
+    font-size: clamp(3rem, 14vw, 4.6rem) !important;
+  }
+
+  .ending {
+    padding-top: 1.65rem !important;
+  }
+
+  .ending-copy {
+    background: rgba(7, 8, 8, 0.9);
+  }
+
+  .birthday {
+    max-height: 31vh !important;
+    font-size: 1rem !important;
+  }
+}
