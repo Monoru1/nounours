@@ -1,0 +1,44 @@
+/* A door closes, the next room opens. No decorative overlay stays on screen. */
+.case-intro__rain { display: none !important; }
+
+.case-scene__copy {
+  animation: chapter-arrival 560ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.case-scene__transition {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform: translateX(105%);
+  background: linear-gradient(90deg, #100d0a, #2a1b0f 50%, #100d0a);
+  color: #f4cf85;
+  font: .68rem 'DM Mono', monospace;
+  letter-spacing: .26em;
+}
+
+.case-scene__transition.is-active {
+  animation: casino-doorway 460ms cubic-bezier(.72, 0, .18, 1) both;
+}
+
+.case-notice {
+  animation: clue-reveal 420ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes chapter-arrival {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes clue-reveal {
+  from { opacity: 0; transform: translateY(9px) rotate(-.4deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+@keyframes casino-doorway {
+  0% { transform: translateX(105%); }
+  47%, 54% { transform: translateX(0); }
+  100% { transform: translateX(-105%); }
+}
