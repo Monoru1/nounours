@@ -8,9 +8,9 @@ type ChapterId = 'bar' | 'office' | 'archives';
 type Chapter = { id: ChapterId; number: string; place: string; character: string; activity: string; copy: string; clue: string; asset: string };
 
 const chapters: Chapter[] = [
-  { id: 'bar', number: '01', place: 'Le Bar Teddy Bear', character: 'Le Barman', activity: 'Il a déjà posé deux chocolats chauds. Il savait que vous finiriez par arriver.', copy: 'La première porte raconte le lieu où l’on revient toujours, même après les nuits trop longues.', clue: '« Les vrais amis ne demandent pas pourquoi tu reviens. Ils gardent simplement ta place. »', asset: casino },
-  { id: 'office', number: '02', place: 'Le bureau de l’Inspecteur', character: 'L’Inspecteur Nounours', activity: 'Il classe un dossier, rate l’alarme, remet son chapeau et fait comme si rien ne s’était passé.', copy: 'Sur son bureau, une loupe et huit années de conversations attendent une explication.', clue: '« Huit années ne se perdent pas. Elles attendent qu’on les regarde avec les bonnes personnes. »', asset: desk },
-  { id: 'archives', number: '03', place: 'Les archives du Casino', character: 'Le Mafieux', activity: 'Il ferme un dossier intitulé “Projet commencé à 2 h 47”, avec un sérieux complètement suspect.', copy: 'Les vieilles affaires rappellent que les idées impossibles sont plus faciles à porter à deux.', clue: '« Le meilleur ami n’est pas un rôle. C’est une présence qui ne se défile pas. »', asset: desk },
+  { id: 'bar', number: '01', place: 'Le Bar Teddy Bear', character: 'Le Barman', activity: 'Il a préparé le chocolat chaud avant même que le King entre en annonçant un nouveau projet impossible.', copy: 'C’est ici que Lawal a toujours eu sa place : au milieu des idées trop grandes, des soirées qui dérapent et des retours après l’orage.', clue: 'Le Barman glisse une carte sous la tasse : « Lawal ne faisait jamais semblant d’écouter. Il restait. Même quand tout le monde aurait eu une excuse pour partir. »', asset: casino },
+  { id: 'office', number: '02', place: 'Le bureau de l’Inspecteur', character: 'L’Inspecteur Nounours', activity: 'Il classe un dossier, rate l’alarme, remet son chapeau et fait comme si rien ne s’était passé.', copy: 'L’Inspecteur, c’est Lawal : celui qui observe avant de parler, désamorce une tempête sans faire de bruit et sait faire rire au bon moment.', clue: 'Dans le carnet, une phrase est soulignée : « Tu as connu les colères, les changements d’humeur et les idées de 2 h 47. Tu as choisi de répondre avec du calme, jamais avec du vide. »', asset: desk },
+  { id: 'archives', number: '03', place: 'Les archives du Casino', character: 'Le Mafieux', activity: 'Il ferme un dossier intitulé “Projet commencé à 2 h 47”, avec un sérieux complètement suspect.', copy: 'Les archives ont gardé les preuves : Lawal est drôle sans jouer un rôle, mature sans devenir lourd, et loyal sans jamais demander de médaille.', clue: 'Dernier dossier : « Depuis plus de huit ans, tu n’es pas un pseudo dans les messages. Tu es le meilleur ami qui rend les jours compliqués beaucoup moins lourds. »', asset: desk },
 ];
 
 function readProgress(): ChapterId[] {
@@ -22,6 +22,8 @@ export function CaseExperience({ config, soundOn, onSoundChange, reducedMotion, 
   const [currentId, setCurrentId] = useState<ChapterId>('bar');
   const [clues, setClues] = useState<ChapterId[]>([]);
   const [notice, setNotice] = useState('Choisissez un chapitre. L’Inspecteur a laissé trois souvenirs à retrouver.');
+  const [isTravelling, setIsTravelling] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => setClues(readProgress()), []);
   useEffect(() => localStorage.setItem('casino-progress', JSON.stringify({ clues })), [clues]);
@@ -33,11 +35,20 @@ export function CaseExperience({ config, soundOn, onSoundChange, reducedMotion, 
     setClues((saved) => [...saved, current.id]);
     setNotice(current.clue);
   };
+  const travel = (chapter: Chapter) => {
+    if (chapter.id === currentId || isTravelling) return;
+    setIsTravelling(true);
+    window.setTimeout(() => { setCurrentId(chapter.id); setNotice(`${chapter.place}. Un souvenir s’y cache.`); setIsTravelling(false); }, 330);
+  };
+  const revealLetter = () => {
+    if (!complete || isTravelling) return;
+    setIsTravelling(true);
+    window.setTimeout(() => setRevealed(true), 430);
+  };
 
   if (!started) return (
     <section className="case-intro" style={{ backgroundImage: `url(${desk})` }}>
       <div className="case-intro__veil" />
-      <div className="case-intro__rain" aria-hidden="true" />
       <div className="case-intro__content">
         <p className="case-kicker">The King’s Casino présente</p>
         <p className="case-file">DOSSIER 0808 · POUR LAWAL</p>
@@ -49,7 +60,7 @@ export function CaseExperience({ config, soundOn, onSoundChange, reducedMotion, 
     </section>
   );
 
-  if (complete && currentId === 'archives') return (
+  if (revealed) return (
     <section className="case-final" style={{ backgroundImage: `url(${casino})` }}>
       <div className="case-final__veil" />
       <article className="case-letter">
@@ -76,8 +87,9 @@ export function CaseExperience({ config, soundOn, onSoundChange, reducedMotion, 
       </header>
       <section className="case-scene" style={{ backgroundImage: `url(${current.asset})` }}>
         <div className="case-scene__veil" />
+        <div className={isTravelling ? 'case-scene__transition is-active' : 'case-scene__transition'} aria-hidden="true"><span>THE KING’S CASINO</span></div>
         <div className="case-inspector" style={{ backgroundImage: `url(${desk})` }} aria-hidden="true" />
-        <article className="case-scene__copy">
+        <article key={current.id} className="case-scene__copy">
           <p className="case-kicker">Chapitre {current.number} · {current.character}</p>
           <h2>{current.place}</h2>
           <p className="case-scene__activity">{current.activity}</p>
@@ -87,10 +99,10 @@ export function CaseExperience({ config, soundOn, onSoundChange, reducedMotion, 
         </article>
         <nav className="case-map" aria-label="Explorer les chapitres du Casino">
           <p>Portes du Casino</p>
-          {chapters.map((chapter) => <button key={chapter.id} className={chapter.id === currentId ? 'is-current' : ''} onClick={() => { setCurrentId(chapter.id); setNotice(`${chapter.place}. Un souvenir s’y cache.`); }}>
+          {chapters.map((chapter) => <button key={chapter.id} className={chapter.id === currentId ? 'is-current' : ''} onClick={() => travel(chapter)}>
             <span>{chapter.number}</span>{chapter.place}<i aria-hidden="true" />
           </button>)}
-          <button className={complete ? 'case-map__final is-open' : 'case-map__final'} onClick={() => complete && setCurrentId('archives')} disabled={!complete}>La lettre</button>
+          <button className={complete ? 'case-map__final is-open' : 'case-map__final'} onClick={revealLetter} disabled={!complete}>La lettre</button>
         </nav>
       </section>
     </main>
