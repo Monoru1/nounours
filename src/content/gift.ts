@@ -1,18 +1,18 @@
-export type Memory = { year: string; title: string; memory: string; private?: boolean };
+export type Memory = { year: string; title: string; memory: string };
 export const giftConfig = {
   recipient: 'Lawal', creator: 'Ryad', friendshipYears: 8,
   characterName: 'L’Inspecteur Nounours',
-  caseTitle: 'L’Affaire des Souvenirs Disparus',
+  title: 'Le Gardien des Tempêtes', caseTitle: 'Dossier n° 0808 — L’Affaire des Souvenirs Disparus',
   memories: [
-    { year: '2018', title: 'Le début de l’enquête', memory: 'À compléter avec votre premier vrai souvenir partagé.' },
-    { year: '2019', title: 'Dossier classé… presque', memory: 'Un détail, une blague ou une référence que vous seuls comprendrez.' },
-    { year: '2020', title: 'La piste continue', memory: 'À compléter avec un moment qui mérite d’être gardé.' },
-    { year: '2021', title: 'Archives sensibles', memory: 'À compléter avec une aventure ou un délire commun.' },
-    { year: '2022', title: 'Témoin fiable', memory: 'À compléter avec ce qui a rendu cette année unique.' },
-    { year: '2023', title: 'Une année de plus', memory: 'À compléter avec une anecdote, même minuscule.' },
-    { year: '2024', title: 'Le fil rouge', memory: 'À compléter avec un projet, un départ ou un retour.' },
-    { year: '2025', title: 'L’enquête continue', memory: 'À compléter avec le prochain souvenir à protéger.' },
+    {year:'01',title:'Les débuts',memory:'Le premier fil du dossier. À compléter avec ce qui a lancé l’histoire.'},
+    {year:'02',title:'Les délires',memory:'Les détails absurdes qui finissent par compter plus qu’on ne le croit.'},
+    {year:'03',title:'La confiance',memory:'Ce qui reste quand le reste commence à faire du bruit.'},
+    {year:'04',title:'Les disputes',memory:'Pas des ruptures : des chemins pour mieux se retrouver.'},
+    {year:'05',title:'Les projets',memory:'Même les idées impossibles ont besoin de quelqu’un qui écoute.'},
+    {year:'06',title:'Les silences',memory:'Savoir rester là, sans forcément avoir à remplir la pièce.'},
+    {year:'07',title:'Les retours',memory:'Le lien qui revient toujours à la surface.'},
+    {year:'08',title:'La suite',memory:'Une porte ouverte sur toutes les aventures qui restent.'},
   ] satisfies Memory[],
-  birthdayMessage: `Huit années, des milliers de messages, des délires, des projets et probablement quelques enquêtes jamais résolues.\n\nTon pseudo aurait pu n’être qu’un nom. Il est devenu un personnage. Et aujourd’hui, ce personnage méritait son propre monde.\n\nJoyeux anniversaire Lawal.\nL’enquête continue.`,
+  birthdayMessage: `Tu as connu mes colères, mes idées impossibles, mes moments de fatigue, mes changements d’humeur et beaucoup trop de projets commencés en même temps.\n\nTu aurais pu te lasser. Tu aurais pu répondre à mes tempêtes par d’autres tempêtes. Mais tu savais me laisser parler, me calmer, me faire rire ou simplement rester là.\n\nTu es drôle sans avoir besoin de forcer. Mature sans être ennuyeux. Sympa sans jouer un rôle.\n\nDepuis plus de huit ans, tu es bien plus qu’un pseudo dans mes messages. Tu es mon meilleur ami.\n\nAlors cette année, je ne voulais pas seulement t’envoyer un message d’anniversaire. Je voulais donner un monde au personnage que tu portes depuis toutes ces années.\n\nJoyeux anniversaire, Lawal.\nMerci d’avoir été l’Inspecteur de mes tempêtes.`,
 };
 export type GiftConfig = typeof giftConfig;
