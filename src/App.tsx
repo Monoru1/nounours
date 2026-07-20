@@ -5,6 +5,7 @@ import './styles/investigation.css';
 import './styles/casino.css';
 import './styles/game.css';
 import './styles/readability.css';
+import './styles/experience.css';
 
 export function App() {
   const [soundOn, setSoundOn] = useState(false);
