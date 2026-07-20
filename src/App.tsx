@@ -7,6 +7,7 @@ import './styles/game.css';
 import './styles/readability.css';
 import './styles/experience.css';
 import './styles/motion.css';
+import './styles/responsive.css';
 
 export function App() {
   const [soundOn, setSoundOn] = useState(false);
